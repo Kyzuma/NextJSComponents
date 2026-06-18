@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Making Components
 
-## Getting Started
+A tiny Next.js (App Router, JavaScript, Tailwind) playground for learning how React
+components work. The home page renders a grid of example components, and adding your
+own is a simple 2-step flow.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install   # already done if you scaffolded with create-next-app
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/
+    page.js          # main showcase page (renders the grid from the registry)
+    layout.js        # root layout
+    globals.css      # Tailwind
+  components/
+    ShowcaseCard.js  # card wrapper: title + description + the live component
+    showcase/
+      registry.js    # the ONE file you edit to add a component
+      Button.js
+      Counter.js     # built FROM the Button component
+      Greeting.js    # takes a prop
+      Card.js        # static presentational component
+```
 
-## Learn More
+## How to add a component
 
-To learn more about Next.js, take a look at the following resources:
+1. Create a file in `src/components/showcase/`, e.g. `MyThing.js`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```jsx
+   export default function MyThing() {
+     return <p>Hello from my component!</p>;
+   }
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Add `"use client";` at the top if it uses state (`useState`) or click handlers.
 
-## Deploy on Vercel
+2. Register it in `src/components/showcase/registry.js`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```js
+   import MyThing from "@/components/showcase/MyThing";
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   export const showcase = [
+     // ...existing entries
+     { name: "MyThing", description: "What it does", Component: MyThing },
+   ];
+   ```
+
+3. Save. It appears on the page automatically.
+
+## The big idea
+
+Components are made out of other components, all the way down to plain HTML tags
+(`<div>`, `<button>`, `<p>`). For example, `Counter` is built from `Button`, and the
+page itself is built from `ShowcaseCard`s. This app demonstrates the very concept it
+is built on: composition and reuse.

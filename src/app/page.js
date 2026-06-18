@@ -1,65 +1,50 @@
-import Image from "next/image";
+import ShowcaseCard from "@/components/ShowcaseCard";
+import { showcase } from "@/components/showcase/registry";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="mx-auto w-full max-w-5xl px-6 py-16">
+      <header className="mb-12">
+        <h1 className="text-4xl font-bold tracking-tight">Making Components</h1>
+        <p className="mt-3 max-w-2xl text-black/60 dark:text-white/60">
+          A playground for learning how components work. Each card below renders a
+          real component from{" "}
+          <code className="rounded bg-black/5 px-1.5 py-0.5 font-mono text-sm dark:bg-white/10">
+            src/components/showcase/
+          </code>
+          . Components are made out of other components — all the way down to plain
+          HTML tags.
+        </p>
+      </header>
+
+      <section className="mb-12 rounded-xl border border-blue-600/20 bg-blue-50/50 p-6 dark:bg-blue-500/5">
+        <h2 className="mb-3 text-lg font-semibold">Add your own component</h2>
+        <ol className="list-inside list-decimal space-y-1 text-sm text-black/70 dark:text-white/70">
+          <li>
+            Create a file in{" "}
+            <code className="font-mono">src/components/showcase/</code>, e.g.{" "}
+            <code className="font-mono">MyThing.js</code>, with a default export.
+          </li>
+          <li>
+            Import it in{" "}
+            <code className="font-mono">src/components/showcase/registry.js</code> and
+            add one entry to the <code className="font-mono">showcase</code> array.
+          </li>
+          <li>Save — it appears below automatically.</li>
+        </ol>
+        <p className="mt-3 text-xs text-black/50 dark:text-white/50">
+          Tip: add <code className="font-mono">&quot;use client&quot;</code> at the top of
+          the file if it uses state or click handlers.
+        </p>
+      </section>
+
+      <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {showcase.map(({ name, description, Component }) => (
+          <ShowcaseCard key={name} name={name} description={description}>
+            <Component />
+          </ShowcaseCard>
+        ))}
+      </section>
+    </main>
   );
 }
