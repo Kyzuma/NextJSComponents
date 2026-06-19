@@ -11,6 +11,8 @@ import Greeting from "@/components/showcase/Greeting";
 import Card from "@/components/showcase/Card";
 import DataList from "@/components/showcase/DataList";
 import KyCard from "@/components/showcase/KyCard";
+import Photo from "@/components/showcase/Photo";
+
 
 export const showcase = [
   {
@@ -67,4 +69,9 @@ export const showcase = [
       </div>
     ),
   },
+  {
+    name: "Photo",
+    description: "Renders images from the public folder using root-relative URLs.",
+    Component: () => <Photo link="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRelRk28mKOqKYtZ2p1dNLJ6LuQr5Ps36r2KW4jOtYzhA&s=10" />
+  }
 ];
