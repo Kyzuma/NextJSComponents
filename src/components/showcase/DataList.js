@@ -12,7 +12,7 @@ export default function DataList({ items = defaultItems }) {
       {items.map((item) => (
         <li
           key={item.id}
-          className="flex items-center justify-between rounded-lg border border-black/10 bg-white px-3 py-2 dark:border-white/10 dark:bg-white/10"
+          className="flex items-center justify-between rounded-lg border border-black/10 bg-white px-2 py-1 dark:border-white/10 dark:bg-white/10"
         >
           <span className="text-sm font-medium">{item.name}</span>
           <span
