@@ -11,6 +11,7 @@ import Greeting from "@/components/showcase/Greeting";
 import Card from "@/components/showcase/Card";
 import DataList from "@/components/showcase/DataList";
 import KyCard from "@/components/showcase/KyCard";
+import CafesList from "@/components/showcase/CafesList";
 
 export const showcase = [
   {
@@ -66,5 +67,48 @@ export const showcase = [
         />
       </div>
     ),
+  },
+{
+    name: "CafesList",
+    description: "Loops Cafes over an array of cafes with .map() (React's v-for).",
+    Component: () => {
+      const cafes = [
+  { 
+    id: "The Quiet Bean", 
+    title: "The Quiet Bean", 
+    bodyColor: "#fdb447", 
+    topColor: "#a16207",
+    body: "A cozy nook perfect for solo work sessions and slow mornings."
+  },
+  { 
+    id: "Brew & Co", 
+    title: "Brew & Co", 
+    bodyColor: "#fccfa5", 
+    topColor: "#8c6590",
+    body: "Lively and social — great for catching up with friends over good coffee."
+  },
+  { 
+    id: "Maple & Roast", 
+    title: "Maple & Roast", 
+    bodyColor: "#fdb5d5", 
+    topColor: "#28d9c1",
+    body: "Warm autumn vibes with seasonal blends and homemade pastries."
+  },
+  { 
+    id: "Grid Coffee", 
+    title: "Grid Coffee", 
+    bodyColor: "#e3dd90", 
+    topColor: "#639259",
+    body: "Minimalist and focused — a go-to for developers and deep work."
+  },
+];
+      return (
+        <div className="flex flex-col gap-3">
+          {cafes.map((cafe) => (
+            <CafesList key={cafe.id} {...cafe} />
+          ))}
+        </div>
+      );
+    },
   },
 ];
