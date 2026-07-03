@@ -11,6 +11,7 @@ import Greeting from "@/components/showcase/Greeting";
 import Card from "@/components/showcase/Card";
 import DataList from "@/components/showcase/DataList";
 import KyCard from "@/components/showcase/KyCard";
+import Map from "@/app/map/components/Map";
 
 export const showcase = [
   {
@@ -66,5 +67,10 @@ export const showcase = [
         />
       </div>
     ),
+  },
+  {
+    name: "Map",
+    description: "Displays an interactive Google Map.",
+    Component: Map,
   },
 ];
